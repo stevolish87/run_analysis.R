@@ -1,0 +1,38 @@
+Input Data
+
+The script assumes the UCI dataset is extracted directly into the C drive of the user. See the README.md for further details.
+
+Output Data
+
+The tidy_data.txt dataset is the output of the script.  The data includes mean and standard deviation calculations for the following variables:
+
+tBodyAcc
+tGravityAcc
+tBodyAccJerk
+tBodyGyro
+tBodyGyroJerk
+tBodyAccMag
+tBodyAccJerkMag
+tBodyGyroMag
+tBodyGyroJerkMag
+fBodyAcc
+fBodyAccJerk
+fBodyGyro
+fBodyAccMag
+fBodyBodyAccJerkMag
+fBodyBodyGyroMag
+fBodyBodyGyroJerkMag. 
+
+For every one of these variables, there is an X, Y, and Z calculation depending upon the direction of the movement.
+
+The above variables where chosen by performing a search of variable names that included "mean" or "std" in their original variable names.
+
+Transformations
+
+The script, run_analysis.R, performs the following tasks,
+
+1.  Loads all of the various data sets into R
+2.  Merges all of the test data sets to their corresponding train data sets.       While doing this, applies appropriate headings.
+3.  Creates a data set filtered by only mean and std variables.
+4.  Computes the means of the smaller data set, grouped by subject     and activity.
+5.  Saves this last data set on your computer and titles the file     "tidy_data.txt"
