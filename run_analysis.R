@@ -30,15 +30,31 @@ colnames(movedata) <- features[, 2]
 # Merge all three datasets into one set called alldata
 alldata <- cbind(subjectbind, label, movedata)
 
+#Provide more descriptive column names to make the data more tidy.
+names(alldata)<-gsub("^t","Time ",names(alldata)) 
+names(alldata)<-gsub("^f","Frequency ",names(alldata)) 
+names(alldata)<-gsub("Acc","Accelerometer ",names(alldata)) 
+names(alldata)<-gsub("Gyro","Gyroscope ",names(alldata)) 
+names(alldata)<-gsub("BodyBody","Body",names(alldata)) 
+names(alldata)<-gsub("Body","Body ",names(alldata)) 
+names(alldata)<-gsub("Gravity","Gravity ",names(alldata)) 
+names(alldata)<-gsub("Mag","Magnitude ",names(alldata)) 
+names(alldata)<-gsub("Jerk","Jerk ",names(alldata)) 
+names(alldata)<-gsub("-mean()","Mean ",names(alldata)) 
+names(alldata)<-gsub("-std()","Standard Deviation ",names(alldata))
+
 # Create a subset of the large data set that only includes the mean and std variables
 # Search for mean and std dev columns
-searchresults <- grep("-mean|-std", colnames(alldata))
+searchresults <- grep("Mean|Standard Deviation", colnames(alldata))
 # Return the subset containing the appropriate columns that contained mean and std dev
 data_mean_std <- alldata[,c(1,2,searchresults)]
+
+
 
 # Compute the means, grouped by subject/label
 computations = melt(data_mean_std, id.var = c("subject", "label"))
 meanstable = dcast(computations , subject + label ~ variable, mean)
+
 
 # Save the resulting dataset to a file path
 write.table(meanstable, file="C:/Users/S0303025/Documents/R/data/tidy_data.txt")
